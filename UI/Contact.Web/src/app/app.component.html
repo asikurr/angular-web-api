@@ -1,0 +1,9 @@
+@if (contacts$ |async; as contacts) {
+  @if (contacts.length > 0) {
+    @for (item of contacts; track $index) {
+      <h4>{{item.name}}</h4>
+    }
+  }@else {
+    <p>No Contact found.</p>
+  }
+}
