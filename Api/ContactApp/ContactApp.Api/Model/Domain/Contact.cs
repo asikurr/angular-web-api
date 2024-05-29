@@ -10,6 +10,6 @@ namespace ContactApp.Api.Model.Domain
         public string? Email { get; set; }
         [Required]
         public string PhoneNumber { get; set; }
-        public bool Favorite { get; set; }
+        public bool? Favorite { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ContactApp.Api.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ContactController : ControllerBase
     {
@@ -17,7 +17,7 @@ namespace ContactApp.Api.Controllers
             _dbContext = dbContext;
         }
         [HttpGet]
-        public IActionResult GellAllContact()
+        public IActionResult Get0AllContact()
         {
             var contacts = _dbContext.Contacts.ToList();
             return Ok(contacts);
@@ -39,6 +39,19 @@ namespace ContactApp.Api.Controllers
             _dbContext.SaveChanges();
 
             return Ok(contact);
+        }
+
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public IActionResult DeleteContact(Guid id)
+        {
+            var con = _dbContext.Contacts.Find(id);
+            if (con is not null)
+            {
+                _dbContext.Contacts.Remove(con);
+                _dbContext.SaveChanges();
+            }
+            return Ok();
         }
     }
 }
